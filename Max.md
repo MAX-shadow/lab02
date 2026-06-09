@@ -1,230 +1,558 @@
-# my-lab02
-# Лабораторная работа 2(изучение систем контроля версий на примере git)
+## Лабораторная работа 2 (туториал + Домашнее задание)
 
-Цель работы работа с репозиториями/ветками и управление файлами cpp обновление и изменение коммитов
+Данная лабораторная работа посвещена изучению систем контроля версий на примере **Git**.
 
-## Подготовка
+(Вводные данные "-"
+ Выходные данные "--"
+ Вводные данные в cat ">")
 
-В начале нужно настроить имя и имейл гитхаба
-```shell
-git config --global user.name "qNetayS"
-git config --global user.email "-"
 ```
-
-## Part1
-
-### 1.Создать пустой репозиторий с лицензий MIT
-создадим через терминал линукса
-```shell
-gh auth login
-gh repo create my-lab02 --public --clone --add-readme --license MIT
+- export GITHUB_USERNAME=MAX-shadow
+- export GITHUB_EMAIL=maxsharov07@gmail.com
+- export GITHUB_TOKEN=***
+- alias edit=nano
+- cd ${GITHUB_USERNAME}/workspace
+- source scripts/activate
+- mkdir ~/.config
+- cat > ~/.config/hub <<EOF
+-- github.com:
+-- - user: ${GITHUB_USERNAME}
+--   oauth_token: ${GITHUB_TOKEN}
+--   protocol: https
+-- EOF
+- git config --global hub.protocol https
+- mkdir projects/lab02 && cd projects/lab02
+- git init
+-- hint: Using 'master' as the name for the initial branch. This default branch name is subject to change. To configure the initial branch name to use in all other repositories, which will suppress this warning, call:
+-- hint:
+-- hint:    git config --global init.defaultBranch <name>
+-- hint:
+-- hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and 'development'. The just-created branch can be renamed via this command:
+-- hint:
+-- hint:    git branch -m <name>
+-- Initialized empty Git repository in /home/max/MAX-shadow/workspace/projects/lab02/.git/
+- git config --global user.name ${GITHUB_USERNAME}
+- git config --global user.email ${GITHUB_EMAIL}
+- git config -e --global
+-- 
+-- [hub]
+-- protocol = https
+-- 
+-- [user]
+-- name = MAX-shadow
+-- email = maxsharov07@gmail.com
+-- 
+- git remote add origin https://github.com/${GITHUB_USERNAME}/lab02.git
+- git pull origin main
+-- remote: Enumerating objects: 3, done.
+-- remote: Counting objects: 100% (3/3), done.
+-- remote: Compressing objects: 100% (2/2), done.
+-- remote: Total 3 (delta 0), reused 0 (delta 0), pack-reused 0 (from 0)
+-- Unpacking objects: 100% (3/3), 1.43 KiB | 1.43 MiB/s, done.
+-- From https://github.com/MAX-shadow/lab02
+--  * branch    main    -> FETCH_HEAD
+--  * [new branch]   main    -> origin/main
+- touch README.md
+- git status
+-- On branch master
+-- Untracked files:
+--   (use "git add <file>..." to include in what will be committed)
+--     README.md
+-- 
+-- nothing added to commit but untracked files present (use "git add" to track)
+- git add README.md
+- git commit -m"added README.md"
+- git commit -m"added README.md"
+-- [master a696b70] added README.md
+--  1 file changed, 0 insertions(+), 0 deletions(-)
+--  create mode 100644 README.md
+- git push origin master
+-- Username for 'https://github.com': MAX-shadow
+-- Password for 'https://MAX-shadow@github.com':
+-- Enumerating objects: 4, done.
+-- Counting objects: 100% (4/4), done.
+-- Delta compression using up to 2 threads
+-- Compressing objects: 100% (2/2), done.
+-- Writing objects: 100% (3/3), 280 bytes | 280.00 KiB/s, done.
+-- Total 3 (delta 0), reused 0 (delta 0), pack-reused 0 (from 0)
+-- remote:
+-- remote: Create a pull request for 'master' on GitHub by visiting:
+-- remote:    https://github.com/MAX-shadow/lab02/pull/new/master
+-- remote:
+-- To https://github.com/MAX-shadow/lab02.git
+--  * [new branch]    master -> master
+- nano .gitignore
+-- *build*/
+-- *install*/
+-- *.swp
+-- .idea/
+- git pull origin main
+-- remote: Enumerating objects: 6, done.
+-- remote: Counting objects: 100% (6/6), done.
+-- remote: Compressing objects: 100% (3/3), done.
+-- remote: Total 4 (delta 0), reused 0 (delta 0), pack-reused 0 (from 0)
+-- Unpacking objects: 100% (4/4), 1.81 KiB | 1.81 MiB/s, done.
+-- From https://github.com/MAX-shadow/lab02
+--  * branch    main    -> FETCH_HEAD
+--    48d14ad..05fa0aa main    -> origin/main
+-- Updating a696b70..05fa0aa
+-- Fast-forward
+-- .gitignore | 4 ++++
+-- 1 file changed, 4 insertions(+)
+-- create mode 100644 .gitignore
+- git log
+-- commit 05fa0aae54cbf53bcc4b618d873b4cc334c3f027 (HEAD -> master, origin/main)
+-- Author: MAX-shadow <maxsharov07@gmail.com>
+-- Date:    Wed Jun 9 23:10:57 2026 +0300
+-- 
+-- Create .gitignore
+-- 
+-- commit 4b8b40ce9f471dfd284998afb7c0a2a13e3491f2
+-- Merge: 48d14ad a696b70
+-- Author: MAX-shadow <maxsharov07@gmail.com>
+-- Date:    Tue Jun 9 23:04:42 2026 +0300
+-- 
+-- Merge pull request #1 from MAX-shadow/master
+-- 
+-- added README.md
+-- 
+-- commit a696b706e02028bc364ad6f60719b3c43d0b1548 (origin/master)
+-- Author: MAX-shadow <maxsharov07@gmail.com>
+-- Date:    Tue Jun 9 23:41:44 2026 -0400
+-- 
+-- added README.md
+-- 
+-- commit 48d14ad75c36add4d5754625722d11c3d4557e30
+-- Author: MAX-shadow <maxsharov07@gmail.com>
+-- Date: Tue Jun 9 23:41:49 2026 +0300
+-- 
+-- Initial commit
+- mkdir sources
+- mkdir include
+- mkdir examples
+- cat > sources/print.cpp <<EOF
+-- #include <print.hpp>
+-- 
+-- void print(const std::string& text, std::ostream& out)
+-- {
+--   out << text;
+-- }
+-- 
+-- void print(const std::string& text, std::ofstream& out)
+-- {
+--   out << text;
+-- }
+-- EOF
+- cat > include/print.hpp <<EOF
+-- #include <fstream>
+-- #include <iostream>
+-- #include <string>
+-- 
+-- void print(const std::string& text, std::ofstream& out);
+-- void print(const std::string& text, std::ostream& out = std::cout);
+-- EOF
+- cat > examples/example1.cpp <<EOF
+-- #include <print.hpp>
+-- 
+-- int main(int argc, char** argv)
+-- {
+--   print("hello");
+-- }
+-- EOF
+- cat > examples/example2.cpp <<EOF
+-- #include <print.hpp>
+-- 
+-- #include <fstream>
+-- 
+-- int main(int argc, char** argv)
+-- {
+--   std::ofstream file("log.txt");
+--   print(std::string("hello"), file);
+-- }
+-- EOF
+- edit README.md
+- git status
+- git add .
+- git commit -m"added sources"
+- git add .
+- git commit -m"added sources"
+-- [master de89ad3] added sources
+--  4 files changed, 32 insertions(+)
+--  create mode 100644 examples/example1.cpp
+--  create mode 100644 examples/example2.cpp
+--  create mode 100644 include/print.hpp
+--  create mode 100644 sources/print.cpp
+- git push origin master
+-- Username for 'https://github.com': MAX-shadow
+-- Password for 'https://MAX-shadow@github.com':
+-- Enumerating objects: 10, done.
+-- Counting objects: 100% (10/10), done.
+-- Delta compression using up to 2 threads
+-- Compressing objects: 100% (7/7), done.
+-- Writing objects: 100% (9/9), 966 bytes | 966.00 KiB/s, done.
+-- Total 9 (delta 0), reused 0 (delta 0), pack-reused 0 (from 0)
+-- To https://github.com/MAX-shadow/lab02.git
+-- a696b70...de89ad3    master -> master
+- git push origin master
+-- Username for 'https://github.com': MAX-shadow
+-- Password for 'https://MAX-shadow@github.com':
+-- Enumerating objects: 10, done.
+-- Counting objects: 100% (10/10), done.
+-- Delta compression using up to 2 threads
+-- Compressing objects: 100% (7/7), done.
+-- Writing objects: 100% (9/9), 966 bytes | 966.00 KiB/s, done.
+-- Total 9 (delta 0), reused 0 (delta 0), pack-reused 0 (from 0)
+-- To https://github.com/MAX-shadow/lab02.git
+-- a696b70..de89ad3    master -> master
 ```
-### 2.Вполнить инструкцию по созданию первого коммита
-инструкция по созданию первого коммита сосотоит из нескольких комманд
-```shell
-echo "#lab02" >> README.md
-git init 
-git add README.md
-git commit -m "first commit"
-git branch -M master
-git remote add origin "//github.com/qNetayS/lab02.git"
-git push -u origin master
+__________________________________________________________________________________________
+HOMEWORK
+__________________________________________________________________________________________
+
+1.
 ```
-### 3.Создание hello_world.cpp с плохим стилем 
-напишем команду создания файла а после код внутри файла
-```shell
-cat > hello_world << "EOF"
+- nano hello_world.cpp
+
+Пишем hello_world.cpp:
 #include <iostream>
+
 using namespace std;
-int main(){
+
+int main() {
     cout << "Hello world" << endl;
     return 0;
 }
-EOF
-```
-```
-### 4-5.Добавление файла в индекс и создание коммита
-данный пункт выполняется простой командой 
-```shell
-git add hello_world_cpp
-```
-коммитим данное действие
-```shell
-git commit -m "add hello_world.cpp"
-```
 
-### 6.Замена кода
-заменим код на код содержащий переменную имени и вывод её с осмысленным сообщением
-```shell
-cat > hello_world.cpp << "EOF"
-#include <isotream>
+- nano hello_world.cpp
+-- $ git add hello_world.cpp
+-- $ git commit -m "Add hello_world.cpp"
+-- [master 6f91e32] Add hello_world.cpp
+--  1 file changed, 6 insertions(+)
+--  create mode 100644 hello_world.cpp
+- nano hello_world.cpp
+
+В hello_world.cpp пишем:
+#include <iostream>
 #include <string>
+
 using namespace std;
-int main(){
+
+int main() {
     string name;
-    cout << " your name";
+    cout << "Enter your name: ";
     cin >> name;
-    cout << "hello world from" << name << endl;
+    cout << "Hello world from " << name << endl;
     return 0;
 }
-EOF
+
+- $ git commit -am "Modified hello_world.cpp to accept user name input"
+-- [master 11a42cc] Modified hello_world.cpp to accept user name input
+--  1 file changed, 5 insertions(+), 1 deletion(-)
+- git push origin master
+-- Username for 'https://github.com': MAX-shadow
+-- Password for 'https://MAX-shadow@github.com':
+-- Enumerating objects: 7, done.
+-- Counting objects: 100% (7/7), done.
+-- Delta compression using up to 2 threads
+-- Compressing objects: 100% (6/6), done.
+-- Writing objects: 100% (6/6), 727 bytes | 727.00 KiB/s, done.
+-- Total 6 (delta 2), reused 0 (delta 0), pack-reused 0 (from 0)
+-- remote: Resolving deltas: 100% (2/2), completed with 1 local object.
+-- To https://github.com/MAX-shadow/lab02.git
+--     de89ad3..11a42cc   master -> master
+- git log --oneline
+-- 11a42cc (HEAD -> master, origin/master) Modified hello_world.cpp to accept user input
+-- 6f91e32 Add hello_world.cpp
+-- de89ad3 added sources
+-- 05fa0aa (origin/main) Create .gitignore
+-- 4b8b40c Merge pull request #1 from MAX-shadow/master
+-- a696b70 added README.md
+-- 48d14ad Initial commit
 ```
-### 7.коммит без git add
-для этого используем коммит с флагом -am
-```shell
-git commit -am "add um input"
+
+2.
+1)
+```
+-git status
+--Текущая ветка: master
+нечего коммитить, нет изменений в рабочем каталоге
+-git checkout -b patch1
+--Переключились на новую ветку «patch1»
+```
+2)
+```
+-git branch
+--master
+* patch1
+-git status
+--Текущая ветка: patch1
+Изменения, которые не в индексе для коммита:
+  (используйте «git add <файл>...», чтобы добавить файл в индекс)
+  (используйте «git restore <файл>...», чтобы отменить изменения в рабочем каталоге)
+	изменено:      hello_world.cpp
+
+индекс пуст (используйте «git add» и/или «git commit -a»)
+-git diff
+--diff --git a/hello_world.cpp b/hello_world.cpp
+index d5e3ac1..c5da6d6 100644
+--- a/hello_world.cpp
++++ b/hello_world.cpp
+@@ -1,12 +1,12 @@
+ #include <iostream>
+ #include <string>
+ 
+-using namespace std;
++
+ 
+ int main(){
+        string n;
+-       cout << "Enter your name: "
+-       cin >> n; 
+-       cout << "hello world from " << n;
++       std::cout << "Enter your name: "
++       std::cin >> n; 
++       std::cout << "hello world from " << n;
+ 
+ }
+```
+3)
+```
+-git add hello_world.cpp
+-git commit -m "Fix code style: remove using namespace std"
+--[patch1 bfbe7a1] Fix code style: remove using namespace std
+ 1 file changed, 4 insertions(+), 4 deletions(-)
+-git push origin patch1
+--Перечисление объектов: 5, готово.
+Подсчет объектов: 100% (5/5), готово.
+Сжатие объектов: 100% (3/3), готово.
+Запись объектов: 100% (3/3), 390 байтов | 390.00 КиБ/с, готово.
+Total 3 (delta 1), reused 0 (delta 0), pack-reused 0 (from 0)
+remote: Resolving deltas: 100% (1/1), completed with 1 local object.
+remote: 
+remote: Create a pull request for 'patch1' on GitHub by visiting:
+remote:      https://github.com/MAX-shadow/lab02/pull/new/patch1
+remote: 
+To https://github.com/MAX-shadow/lab02.git
+ * [new branch]      patch1 -> patch1
+```
+4)
+Проверка
+5)
+Создание
+6)
+```
+-nano hello_world.cpp
+```
+(добавляем комменарии)
+7)
+```
+-git add hello_world.cpp
+-git commit -m "Add comments to hello_world.cpp"
+--[patch1 791cb07] Add comments to hello_world.cpp
+ 1 file changed, 4 insertions(+), 4 deletions(-)
+-git push origin patch1
+--Перечисление объектов: 5, готово.
+Подсчет объектов: 100% (5/5), готово.
+Сжатие объектов: 100% (3/3), готово.
+Запись объектов: 100% (3/3), 463 байта | 463.00 КиБ/с, готово.
+Total 3 (delta 1), reused 0 (delta 0), pack-reused 0 (from 0)
+remote: Resolving deltas: 100% (1/1), completed with 1 local object.
+To https://github.com/MAX-shadow/lab02.git
+   bfbe7a1..791cb07  patch1 -> patch1
+```
+8)
+```
+-git checkout master
+```
+--Переключились на ветку «master»
+9)
+Удаляем ветку patch1
+10)
+```
+-git pull origin master
+--remote: Enumerating objects: 22, done.
+remote: Counting objects: 100% (22/22), done.
+remote: Compressing objects: 100% (13/13), done.
+remote: Total 14 (delta 5), reused 0 (delta 0), pack-reused 0 (from 0)
+Распаковка объектов: 100% (14/14), 7.02 КиБ | 423.00 КиБ/с, готово.
+Из https://github.com/MAX-shadow/lab02
+ * branch            master     -> FETCH_HEAD
+   eaa73c1..d065802  master     -> origin/master
+Обновление eaa73c1..d065802
+Fast-forward
+ .gitignore      | 4 ++++
+ hello_world.cpp | 9 +++++----
+ 2 files changed, 9 insertions(+), 4 deletions(-)
+ create mode 100644 .gitignore
+```
+11)
+```
+-git log --oneline
+--d065802 (HEAD -> master, origin/master) Merge pull request #6 from MAX-shadow/patch1
+07aa3a4 Merge branch 'revert-4-master' into patch1
+1c642fd (origin/patch1, patch1) Add comments to hello_world.cpp
+3982c92 Add comments to hello_world.cpp
+22fa24d Revert "Master"
+791cb07 Add comments to hello_world.cpp
+0b4fa7e Merge pull request #4 from MAX-shadow/master
+119c5a8 Merge pull request #3 from MAX-shadow/patch1
+bfbe7a1 Fix code style: remove using namespace std
+e291cb0 Merge pull request #2 from MAX-shadow/master
+eaa73c1 REPROGRAM hello_world.cpp
+a6c285b ADD hello_world.cpp
+7b151ec added sources
+6171f6c Create .gitignore
+c95d6d2 Merge pull request #1 from MAX-shadow/master
+ce8b8b8 added README.md
+338d3c2 (origin/main) Initial commit
+```
+12)
+```
+-git branch -d patch1
+--Ветка patch1 удалена (была 1c642fd).
 ```
 
-### 8.запушим изменения в удаленный репозиторий
-```shell
-git push
+3.
+1)
 ```
-
-### 9.проверка истории
-в данном пункте нужно проверить все ли действия отобразились на странице гитхаба 
-Результат:все действия отобразились 
-
-## Part2
-В данной часте отображается работа с ветками 
-
-### 1-2.Создайте локальную ветку patch1 и написание туда код без usingnamespace std
-
-
-```shell
-git checkout -b patch1
+-git checkout -b patch2
+--Переключились на новую ветку «patch2»
+-git branch
+-- master
+* patch2
 ```
-редактируем hello_world.cpp
-
-```shell
-cat > hello_world.cpp << "EOF"
-#include <iostream>
-#include <string>
-int main(){
-    std::string name;
-    std::cout << "your name";
-    std::cin >> name;
-    std::cout << "hello world from" << name << std::endl;
-    return 0;
+2)
+Установка
+```
+-sudo apt update
+-sudo apt install clang-format
+Работа
+-clang-format -style=Mozilla -i hello_world.cpp
+-git diff
+--diff --git a/hello_world.cpp b/hello_world.cpp
+index 35d9027..64e0dc8 100644
+--- a/hello_world.cpp
++++ b/hello_world.cpp
+@@ -3,11 +3,12 @@
+ 
+ using namespace std;
+ 
+-int main(){
+-       string n;//Объявляем n
+-       std::cout << "Enter your name: "//Запрашиваем имя
+-       std::cin >> n; //Вводим n
+-       std::cout << "hello world from " << n;//Выводим текст
+-
+-
++int
++main()
++{
++  string n;                        // Объявляем n
++  std::cout << "Enter your name: " // Запрашиваем имя
++      std::cin >>
++    n;                                   // Вводим n
++  std::cout << "hello world from " << n; // Выводим текст
+```
 }
-EOF
+3)
 ```
+-git add hello_world.cpp
+-git commit -m "Format hello_world.cpp with Mozilla style using clang format"
+--[patch2 7640f50] Format hello_world.cpp with Mozilla style using clang format
+ 1 file changed, 8 insertions(+), 7 deletions(-)
+-git push -u origin patch2
+--Перечисление объектов: 5, готово.
+Подсчет объектов: 100% (5/5), готово.
+Сжатие объектов: 100% (3/3), готово.
+Запись объектов: 100% (3/3), 510 байтов | 510.00 КиБ/с, готово.
+Total 3 (delta 1), reused 0 (delta 0), pack-reused 0 (from 0)
+remote: Resolving deltas: 100% (1/1), completed with 1 local object.
+remote: 
+remote: Create a pull request for 'patch2' on GitHub by visiting:
+remote:      https://github.com/MAX-shadow/lab02/pull/new/patch2
+remote: 
+To https://github.com/MAX-shadow/lab02.git
+ * [new branch]      patch2 -> patch2
+branch 'patch2' set up to track 'origin/patch2'.
+```
+4)
+```
+-git checkout master
+--Переключились на ветку «master»
+-nano hello_world.cpp
+-git add hello_world.cpp
+-git commit -m "Fix comments: translate them into english"
+--[master 6b2db32] Fix comments: translate them into english
+ 1 file changed, 4 insertions(+), 4 deletions(-)
+-git push origin master
+--Перечисление объектов: 5, готово.
+Подсчет объектов: 100% (5/5), готово.
+Сжатие объектов: 100% (3/3), готово.
+Запись объектов: 100% (3/3), 377 байтов | 377.00 КиБ/с, готово.
+Total 3 (delta 2), reused 0 (delta 0), pack-reused 0 (from 0)
+remote: Resolving deltas: 100% (2/2), completed with 2 local objects.
+To https://github.com/MAX-shadow/lab02.git
+   d065802..6b2db32  master -> master
+-git checkout patch2
+--Переключились на ветку «patch2»
+Эта ветка соответствует «origin/patch2».
+-git fetch origin
+```
+5)
+Убедимся в наличии конфликтов
+6)
+```
+-git pull --rebase origin master
+--Из https://github.com/MAX-shadow/lab02
+ * branch            master     -> FETCH_HEAD
+Автослияние hello_world.cpp
+КОНФЛИКТ (содержимое): Конфликт слияния в hello_world.cpp
+error: не удалось применить коммит 7640f50... Format hello_world.cpp with Mozilla style using clang format
+hint: Resolve all conflicts manually, mark them as resolved with
+hint: "git add/rm <conflicted_files>", then run "git rebase --continue".
+hint: You can instead skip this commit: run "git rebase --skip".
+hint: To abort and get back to the state before "git rebase", run "git rebase --abort".
+hint: Disable this message with "git config advice.mergeConflict false"
+Не удалось применить коммит 7640f50... Format hello_world.cpp with Mozilla style using clang format
+-nano hello_world.cpp
+```
+(Удаляем версию с изменёнными комментариями)
+7)
+```
+-git add hello_world.cpp
+-git rebase --continue
+--[отделённый HEAD cfa03ee] Format hello_world.cpp with Mozilla style using clang format
+ 1 file changed, 8 insertions(+), 9 deletions(-)
+Успешно перемещён и обновлён refs/heads/patch2.
+---format hello_world.cpp with Mozilla style using clang format
 
-### 3.commit push ветки patch1
-```shell
-git commit -am "fix codestyle"
-git push -u origin patch1
-```
-### 4-5 проверкадоступа ветки в удаленном репозитории и создания пул реквеста
-для первого пункта перключаем ветку master -> patch1
-для второго пункта создаем new pull rewuest во вкладке pull request
-при создании используем master <- patch1 и  create pull request
-добавляем описание
-результаты можно увидеть на моем гитхабе в публичном репозитории
+# Conflicts:
+#       hello_world.cpp
 
-### 6.В локальной ветке patch1 добавить комментарии 
-для этого изменим hello_world.cpp добавить комментарии
-```shell
-cat > hello_world.cpp << "EOF"
-#include <iostream>
-#include <string>
-//main func
-int main(){
-    std::string name; // my name
-    std::cout << "your name";
-    std::cin >> name;
-    //output name with another info
-    std::cout << "hello world from " << name << std::endl;
-    return 0;
-}
-EOF
-```
-### 7.commit ,push в ту же ветку 
-для этго используем команды 
-```shell
-git commit -am "add comm"
-git push
-```
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+#
+# интерактивное перемещение в процессе; над 6b2db32
+# Last command done (1 command done):
+#    pick 7640f50 Format hello_world.cpp with Mozilla style using clang format
+# Команд больше не осталось.
+# Вы сейчас перемещаете ветку «patch2» над «6b2db32».
+#
+# Изменения, которые будут включены в коммит:
+#       изменено:      hello_world.cpp
+#
 
-### 8-9.проверка и выполняем слияние
-открываем pull request и файлы file changed и старый и новый код должны быть видны
-на странице пул реквеста нажимаем merge pull request и confirm branch
-delete branch
+-git push --force origin patch2
+--Перечисление объектов: 5, готово.
+Подсчет объектов: 100% (5/5), готово.
+Сжатие объектов: 100% (3/3), готово.
+Запись объектов: 100% (3/3), 502 байта | 502.00 КиБ/с, готово.
+Total 3 (delta 1), reused 0 (delta 0), pack-reused 0 (from 0)
+remote: Resolving deltas: 100% (1/1), completed with 1 local object.
+To https://github.com/MAX-shadow/lab02.git
+ + 7640f50...cfa03ee patch2 -> patch2 (forced update)
+```
+8)
+Убедимся, что конфликты пропали
 
-### 10.локально выполните pull  в ветке mster 
-переходим в мастер и пишем pull
 
-```shell
-git checkout master
-git pull
-```
-
-### 11.просмотреть историю git log
-пишем в строку 
-```shell
-git log --oneline --graph --all
-```
-результат:
-a751b-- (head ->master,origin/master_merge pull request #1 from qNetayS/patch1
-и т.д
-
-### 12.удалить локальную ветку patch1
-
-удаление выполняется через команду:
-```shell
-git branch -d patch1
-```
-
-## Part3
-
-### 1.Создаем новую локальную ветку patch2 от master
-```shell
-git checkout master
-git checkout -b patch2
-```
-### 2.изменение кодстайла с помощью clang-format -style=Mozilla
-для начала скачаем clang-format
-```shell
-sudo apt install clang-format
-```
-после этого меняем кодстал через данную библиотеку
-
-```shell
-clang-format -style=Mozilla -i hello_world.cpp
-```
-
-### 3.commit,push создайте pull-request patch2 ->master
-```shell
-git commit -am "apply mozilla code style
-git push -u origin patch2
-```
-### 4.изменение в удаленной ветке комментариев
-через терминал это можно выполнить командой commit -am
-```shell
-git checkout master
-git commit -am "change language to rus"
-git push
-```
-### 5-6.Проверка наличия конфликтов в pul request и исправление конфликтов
-переходим в ветку пул реквестов patch2 ->master и оно показывает надпись невозможности автоматического соединения
-для решения данной проблемы мы используем связку pull + rebase 
-```shell
-git checkout patch2
-git fetch origin
-git rebase origin/master
-```
-далее после невозможности кофликта заходим в папку hello_world.cpp и убираем все ====
-и >>>>
-после правок 
-```shell
-git add hello_world.cpp
-git rebase --continue
-```
-### 7-9 сделать force push в ветку patch2 проверка на наличие конфликто и слияние пулреквестов 
-для первого пункта используем стандартную функцию push
-```shell
-git push --force-with-lease origin patch2
-```
-мы успешно пропушилив нашу ветку нужные обновления 
-далее для 8 пункта мы проверим конфликты - конфликты пропали
-Выполним слияние как мы это делали во второй части через merge pull request
-результат:слияние выполнено
